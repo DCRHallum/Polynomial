@@ -1,5 +1,3 @@
-import math
-
 class Poly:
 
     def __init__(self,poly):
@@ -19,7 +17,19 @@ class Poly:
             for i in poly:
                 dPoly.append([i[0]*i[1],i[1]-1])
             dPoly.pop(len(dPoly)-1)
-            self.poly = dPoly
+            poly = dPoly
+        return poly
+
+    def indefInterg(self,order,intergValue0): #intergValue0 = value of integral when x = 0 (basically C)
+        poly = self.poly
+        sPoly = [] #intergrated version of polynomial
+        for n in range(order):
+            for i in poly:
+                sPoly.append([i[0]/(i[1]+1),i[1]+1])
+            sPoly.append([intergValue0,0])
+            poly = sPoly
+            sPoly = []
+        return poly
 
     def defInterg(self, lower, upper):
         poly = self.poly
